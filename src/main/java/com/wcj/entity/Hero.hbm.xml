@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+<class name="com.wcj.entity.Hero" table="heros">
+	<id name='id' column='id' type='java.lang.Integer'>
+		<generator class='native'>
+		</generator>
+	</id>
+	<property name='name' column='name' type='java.lang.String'/>	
+	<property name='nickname' column='nickname' type='java.lang.String'/>	
+	<property name='sex' column='sex' type='java.lang.Character'/>	
+	<!--  <property name='bir' column='bir' type='java.util.Date'/>	-->
+	<property name='first' column='first' type='java.lang.String'/>	
+	<property name='second' column='second' type='java.lang.String'/>
+	<property name='Q' column='Q' type='java.lang.String'/>
+	<property name='W' column='W' type='java.lang.String'/>
+	<property name='E' column='E' type='java.lang.String'/>
+	<property name='R' column='R' type='java.lang.String'/>
+	<property name='passivity' column='passivity' type='java.lang.String'/>
+	<property name='img' column='img' type='java.lang.String'/>
+	<!--<property name='birthday' column='birthday' type='java.util.Date'/>-->
+	
+	
+</class>
+</hibernate-mapping>

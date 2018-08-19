@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.wcj</groupId>
+  <artifactId>ssh</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ssh Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <!-- 配置版本变量（属性） ,在下面引入spring依赖包的时候就不用再写版本了-->
+  <properties>
+  	<spring.version>4.2.0.RELEASE</spring.version>
+  </properties>
+  
+  
+  
+  <dependencies>
+  
+  <!-- spring 依赖包 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+  <!--spring 的Aop 切面 依赖包 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+   <!--spring 用于框架整合的包  -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+    <!-- 有关数据库相关的三个包 -->
+    <!-- jdbc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <!-- orm 实体关系映射 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <!-- mysql依赖 -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.42</version>
+    </dependency>
+    
+    <!--hibernate的依赖  -->
+	 <dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>3.3.2.GA</version>
+	</dependency>
+    <!--hibernate所需要的  -->
+	<dependency>
+	    <groupId>javassist</groupId>
+	    <artifactId>javassist</artifactId>
+	    <version>3.9.0.GA</version>
+	</dependency>
+     <!---hibernate所需要的日志依赖 https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-nop</artifactId>
+	    <version>1.5.6</version>
+	</dependency>
+    
+    <!-- 连接池 commons-dbcp -->
+    <dependency>
+    	<groupId> commons-dbcp</groupId>
+	    <artifactId> commons-dbcp</artifactId>
+	    <version>1.2.2</version>
+    </dependency>
+    
+    <!-- struts2的核心包 -->
+	<dependency>
+	    <groupId>org.apache.struts</groupId>
+	    <artifactId>struts2-core</artifactId>
+	    <version>2.3.30</version>
+	</dependency>
+    <!-- struts2和spring的整合插件包，用于spring管理struts的action -->
+    <dependency>
+	    <groupId>org.apache.struts</groupId>
+	    <artifactId>struts2-spring-plugin</artifactId>
+	    <version>2.3.30</version>
+	</dependency>
+	
+	<!-- spring 的web包 -->
+	<dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+    <!-- spring 的webmvc包 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>ssh</finalName>
+  </build>
+</project>

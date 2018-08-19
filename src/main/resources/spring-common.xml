@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+<!-- 通用配置 -->
+       <!-- datasource 配置，数据源-->
+	    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	        <property name="url" value="jdbc:mysql://localhost/test?useUnicode=true&amp;characterEncoding=UTF8" />
+	        <property name="username" value="root"></property>
+	        <property name="password" value="123"></property>
+	    </bean>
+       
+       <!-- sessionFactory spring写的对hibernate的支持类，并注入-->
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	   		<!-- 给会话工厂注入数据源 -->
+	         <property name="dataSource" ref="dataSource"/>
+	         <property name="hibernateProperties">
+	             <props>
+	                <!-- 方言设置 -->
+	                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	                <!-- 是否显示sql语句设置 -->
+	                <prop key="hibernate.show_sql">true</prop>                 
+	             </props>
+	         </property>
+	         <!-- 指定orm映射文件的路径 -->
+	         <property name="mappingLocations">
+	             <list>
+	                 <value>classpath:com/wcj/entity/*.hbm.xml</value>
+	             </list>
+	         </property>
+  		 </bean>
+  		 
+  		 <!-- hibernateTemplate模板类对象类， 包含前置通知（session.beginTransaction ） 后置通知（事务的提交），
+  		            用于简化dao层代码  -->
+  		 <!-- 将session工厂对象注入到模板类中的相应属性中 -->
+  		 <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+  		 	<property name="sessionFactory" ref="sessionFactory"></property>
+  		 </bean>
+  		 
+  		 <!-- 为service业务层准备事务管理器   切的是服务层！！！而不是dao层 -->
+  		 <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  		 	<property name="sessionFactory" ref="sessionFactory"> </property>
+  		 </bean>
+       
+        <!-- 基于事务管理器配置事务属性(指定什么方法采用什么事务策略)-->
+	    <tx:advice id="txAdvice" transaction-manager="txManager">
+	        <tx:attributes>
+	            <tx:method name="add*" propagation="REQUIRED"/>
+	            <tx:method name="update*" propagation="REQUIRED"/>
+	            <tx:method name="del*" propagation="REQUIRED"/>
+	            <!-- 除了以上的方法外剩下的方法都不开事务 --> 
+	            <tx:method name="*" propagation="SUPPORTS"/>
+	        </tx:attributes>
+	    </tx:advice>
+        
+          <!-- 事务切面配置 -->
+		    <aop:config>
+		        <!-- 切入点(指定需要织入事务的业务方法的范围) -->
+		        <aop:pointcut  id="apointcut" expression="execution(* com.wcj.service..*.*(..))"/>       
+		        <!-- 将前面准备好的事务属性/事务策略 织入到切入点所表示的方法上 -->
+		        <aop:advisor advice-ref="txAdvice" pointcut-ref="apointcut"/>
+		    </aop:config>
+        
+        
+</beans>

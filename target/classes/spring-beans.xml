@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+       
+    <!-- 原理：HeroDaoImpl继承了HibernateDaoSupport，而后者中有HibernateTemplate属性，
+ 	          配置文件中也设置了id为其的HibernateTemplate对象，通过byname自动注入HibernateTemplate对象值给父类的那个属性
+ 	          实现将模板类插入到各个dao类 -->
+ 	<bean id="heroDao" class="com.wcj.dao.impl.HeroDaoImpl" autowire="byName"/>
+ 	
+ 	<!-- 将HeroDaoImpl自动注入给HeroServiceImpl -->
+	<bean id="heroService" class="com.wcj.service.impl.HeroServiceImpl" autowire="byName"></bean>
+</beans>
