@@ -17,12 +17,10 @@ public class HeroServiceImpl implements HeroService{
 	}
 
 	public int addHero(Hero hero) {
-		// TODO Auto-generated method stub
 		return heroDao.addHero(hero);
 	}
 
 	public void delHero(Hero hero) {
-		// TODO Auto-generated method stub
 		heroDao.delHero(hero);
 	}
 

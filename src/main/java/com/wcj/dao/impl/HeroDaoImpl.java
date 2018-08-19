@@ -25,12 +25,10 @@ public class HeroDaoImpl extends HibernateDaoSupport implements HeroDao {
 	}
 
 	public void delHero(Hero hero) {
-		// TODO Auto-generated method stub
 		this.getHibernateTemplate().delete(hero);
 	}
 
 	public void updateHero(Hero hero) {
-		// TODO Auto-generated method stub
 		this.getHibernateTemplate().update(hero);
 	
 	}

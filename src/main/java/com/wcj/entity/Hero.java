@@ -118,9 +118,12 @@ public class Hero  implements Serializable{
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return this.name;
+		return "Hero [id=" + id + ", name=" + name + ", nickname=" + nickname + ", sex=" + sex + ", first=" + first
+				+ ", second=" + second + ", Q=" + Q + ", W=" + W + ", E=" + E + ", R=" + R + ", passivity=" + passivity
+				+ ", img=" + img + "]";
 	}
+
+	
 	
 	
 	

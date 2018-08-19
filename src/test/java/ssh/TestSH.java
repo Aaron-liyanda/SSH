@@ -20,6 +20,9 @@ public class TestSH extends TestCase{
 		ApplicationContext context=new ClassPathXmlApplicationContext(p);
 	    HeroService heroService=(HeroService) context.getBean("heroService");
 	    List<Hero> heros = heroService.findHero();
+	    for (Hero hero : heros) {
+			System.out.println(hero);
+		}
 	    System.out.println(heros);
 	}
 	public void testSHadd(){
@@ -37,7 +40,7 @@ public class TestSH extends TestCase{
 		ApplicationContext context=new ClassPathXmlApplicationContext(p);
 	    HeroService heroService=(HeroService) context.getBean("heroService");
 	    Hero hero=new Hero();
-	    hero.setId(131);
+	    hero.setId(133);
 	    //hero.setName("码云");
 	    heroService.delHero(hero);//返回的是id值
 	}
