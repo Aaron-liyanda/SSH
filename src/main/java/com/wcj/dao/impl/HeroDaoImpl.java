@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.wcj.dao.HeroDao;
 import com.wcj.entity.Hero;
@@ -17,14 +18,16 @@ import com.wcj.entity.Hero;
 //类中有hibernateTemplate模板类对象属性,可以插入到每一个dao类中
 //就不用再手动处理事务以及session了，均通过前置后置通知做了
 
-public class HeroDaoImpl extends HibernateDaoSupport implements HeroDao {
+@Repository
+public class HeroDaoImpl extends MyHibernateSipport implements HeroDao {
 
 	public int addHero(Hero hero) {
 		Integer count=(Integer) this.getHibernateTemplate().save(hero);
 		return count;
 	}
 
-	public void delHero(Hero hero) {
+	public void delHero(int id) {
+		Hero hero = this.getHibernateTemplate().load(Hero.class, id);
 		this.getHibernateTemplate().delete(hero);
 	}
 
@@ -39,6 +42,8 @@ public class HeroDaoImpl extends HibernateDaoSupport implements HeroDao {
 		
 		return heros;
 	}
+	
+	
 	
 	//得到原生session，并进行分页
 	public List getPage(final int page,final int size){
@@ -68,10 +73,15 @@ public class HeroDaoImpl extends HibernateDaoSupport implements HeroDao {
 		return count;
 	}
 
-	public List<Hero> findByName(Hero hero) {
-		List<Hero> heros=(List<Hero>) this.getHibernateTemplate().find("from Hero where name=?", hero.getName());
-		
-		return heros;
+	
+	public void delById(Hero hero) {
+		List<Hero> heros=(List<Hero>) this.getHibernateTemplate().find("from Hero where id=?", hero.getId());
+		this.getHibernateTemplate().delete(hero);
+	}
+
+	public Hero findById(int id) {
+		Hero hero = this.getHibernateTemplate().load(Hero.class, id);
+		return hero;
 	}
 	
 

@@ -25,6 +25,18 @@ public class TestSH extends TestCase{
 		}
 	    System.out.println(heros);
 	}
+	
+//	public void testSHfindunique(){
+//		//遇到的问题：如何读取两个配置文件?
+//		//用数组解决
+//		String p[]={"spring-common.xml","spring-beans.xml"};
+//		ApplicationContext context=new ClassPathXmlApplicationContext(p);
+//	    HeroService heroService=(HeroService) context.getBean("heroService");
+//	    Hero aaron = heroService.findUniqueName("Aaron");
+//	    System.out.println(aaron);
+//	}
+	
+	
 	public void testSHadd(){
 		String p[]={"spring-common.xml","spring-beans.xml"};
 		ApplicationContext context=new ClassPathXmlApplicationContext(p);
@@ -35,14 +47,15 @@ public class TestSH extends TestCase{
 	    Integer i=heroService.addHero(hero);//返回的是id值
 	    System.out.println(i);
 	}
+	
 	public void testSHdel(){
 		String p[]={"spring-common.xml","spring-beans.xml"};
 		ApplicationContext context=new ClassPathXmlApplicationContext(p);
 	    HeroService heroService=(HeroService) context.getBean("heroService");
 	    Hero hero=new Hero();
-	    hero.setId(133);
+//	    hero.setName("码云");
 	    //hero.setName("码云");
-	    heroService.delHero(hero);//返回的是id值
+	    heroService.delHero(12);//返回的是id值
 	}
 	
 	public void testSHupdate(){
@@ -50,9 +63,9 @@ public class TestSH extends TestCase{
 		ApplicationContext context=new ClassPathXmlApplicationContext(p);
 	    HeroService heroService=(HeroService) context.getBean("heroService");
 	    Hero hero=new Hero();
-	    hero.setId(131);
+	    hero.setId(23);
 
-	    hero.setName("妈妈");
+	    hero.setName("aa");
 	   
 	    heroService.updateHero(hero);;//返回的是id值
 	}
@@ -70,16 +83,16 @@ public class TestSH extends TestCase{
 		String p[]={"spring-common.xml","spring-beans.xml"};
 		ApplicationContext context=new ClassPathXmlApplicationContext(p);
 	    HeroService heroService=(HeroService) context.getBean("heroService");
-	    Long count =heroService.getCount();
+	    int count =(int)heroService.getCount();
 	    System.out.println(count);
 	}
-	public void testSHgetListByName(){
-		String p[]={"spring-common.xml","spring-beans.xml"};
-		ApplicationContext context=new ClassPathXmlApplicationContext(p);
-	    HeroService heroService=(HeroService) context.getBean("heroService");
-	    Hero hero=new Hero();
-	    hero.setName("妈妈");
-	    List<Hero> heros=heroService.findByName(hero);
-	    System.out.println(heros);
-	}
+//	public void testSHgetListByName(){
+//		String p[]={"spring-common.xml","spring-beans.xml"};
+//		ApplicationContext context=new ClassPathXmlApplicationContext(p);
+//	    HeroService heroService=(HeroService) context.getBean("heroService");
+//	    Hero hero=new Hero();
+//	    hero.setName("妈妈");
+//	    List<Hero> heros=heroService.findByName(hero);
+//	    System.out.println(heros);
+//	}
 }

@@ -19,9 +19,16 @@ xsi:schemaLocation="
        
     <!-- 原理：HeroDaoImpl继承了HibernateDaoSupport，而后者中有HibernateTemplate属性，
  	          配置文件中也设置了id为其的HibernateTemplate对象，通过byname自动注入HibernateTemplate对象值给父类的那个属性
- 	          实现将模板类插入到各个dao类 -->
+ 	          实现将模板类插入到各个dao类 
  	<bean id="heroDao" class="com.wcj.dao.impl.HeroDaoImpl" autowire="byName"/>
  	
- 	<!-- 将HeroDaoImpl自动注入给HeroServiceImpl -->
+ 	 将HeroDaoImpl自动注入给HeroServiceImpl 
 	<bean id="heroService" class="com.wcj.service.impl.HeroServiceImpl" autowire="byName"></bean>
+	
+	 action 注意不能是单例 的  scope=prototype 
+	<bean id="heroAction" class="com.wcj.web.HeroAction" autowire="byName" scope="prototype"/>
+	-->
+	
+	<context:component-scan base-package="com.wcj" />
+	
 </beans>
